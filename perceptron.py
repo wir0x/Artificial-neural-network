@@ -1,63 +1,63 @@
-learning_rate = 0.6
-weights = [1, 0, 0.5]
-training_set = [((1, 1, 1), 1),
-                ((1, 1, 0), 0),
-                ((1, 0, 1), 0),
-                ((1, 0, 0), 0)]
+import random
+
+vc = [[1, 0, 0],
+      [1, 0, 1],
+      [1, 1, 0],
+      [1, 1, 1]]
+
+y = [0, 1, 1, 1]
+w = [1, 0, 0.5]
+learn = 0.6
 
 
-def dot_product(values, weights):
-    return sum(value * weight for value, weight in zip(values, weights))
+def weight_random(vector):
+    pesos = []
+    for i in range(len(vector)):
+        pesos.append(random.uniform(-2, 2))
+    return pesos
 
 
-# execute program
-while True:
-    print('-' * 60)
-    error_count = 0
+def formula(vector):
+    temp_v = []
+    for i in range(len(vector)):
+        temp_v.append(vector[i] * w[i])
+    return sum(temp_v)
 
-    for input_vector, desired_output in training_set:
-        print(weights)
 
-        result = dot_product(input_vector, weights)
+def recalculate_weight(e, x):
+    for i in range(len(w)):
+        w[i] += learn * e * x[i]
 
-        if result >= 0:
-            result = 1
+
+def validate_simple_perceptron(v):
+    print("*" * 50 + "\n validate simple perceptron")
+    for i in range(len(v)):
+        net.append(formula(v[i]))
+        _error = y[i] - 1 if net[i] > 0 else 0
+
+        if _error != 0:
+            return False
+    return True
+
+
+count = 0
+while len(vc) > count:
+    net = []
+    print("-" * 50)
+
+    for i in range(len(vc)):
+        print(w)
+
+        net.append(formula(vc[i]))
+
+        result = 1 if net[i] > 0 else 0
+        error = y[i] - result
+
+        if error == 0:
+            count += 1
+
         else:
-            result = 0
+            recalculate_weight(error, vc[i])
+            count = 0
 
-        error = desired_output - result
-
-        if error != 0:
-            error_count += 1
-
-            for index, value in enumerate(input_vector):
-                weights[index] += learning_rate * error * value
-
-    if error_count == 0:
-        break
-
-flag = True
-# validate
-
-print("-" * 60)
-print("verification")
-print('-' * 60)
-for input_vector, desired_output in training_set:
-        print(weights)
-
-        result = dot_product(input_vector, weights)
-
-        if result >= 0:
-            result = 1
-        else:
-            result = 0
-
-        error = desired_output - result
-
-        if error != 0:
-            print("weight no correct :(")
-            break
-print("weight correct! :D")
-
-
-
+print("ok" if validate_simple_perceptron(vc) else "bad")
