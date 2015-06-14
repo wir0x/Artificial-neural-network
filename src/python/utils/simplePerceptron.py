@@ -4,14 +4,14 @@ import logging
 log = logging
 
 
-def get_random_weight(iteration):
+def random_weight(iteration):
     v = []
     for i in range(iteration):
         v.append(random.uniform(-2, 2))
     return v
 
 
-def get_random_factor_learning():
+def random_factor_learning():
     return random.uniform(0.2, 0.9)
 
 

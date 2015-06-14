@@ -14,7 +14,7 @@ learn = 0.6
 while True:
     print("-" * 60)
     count = 0
-    for i in range(len(vx)):  # tour the inputs
+    for i in range(len(vx)):
         print("vw", vw)
         net_i = find_net_i(vw, vx[i])
         error = find_error(vy[i], net_i)
