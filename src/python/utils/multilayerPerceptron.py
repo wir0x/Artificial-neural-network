@@ -1,18 +1,6 @@
 import random
-import logging
-
-log = logging
 
 
-def random_weight(number_iteration, range_one, range_two):
-    v = []
-    for i in range(number_iteration):
-        v.append(random.uniform(range_one, range_two))
-    return v
-
-
-def random_factor_learning():
-    return random.uniform(0.2, 0.9)
 
 
 def get_product_vectors(v1, v2):
@@ -24,7 +12,8 @@ def get_product_vectors(v1, v2):
 
 def get_sum_product_vectors(v1, v2):
     if not v1 or not v2:
-        log.warning("vector is empty")
+        print("vectors are not equals")
+
     return sum(get_product_vectors(v1, v2))
 
 
@@ -41,3 +30,5 @@ def find_error(y, net_i):
 
 def find_net_i(vw, vx):
     return 1 if get_sum_product_vectors(vw, vx) > 0 else 0
+
+
